@@ -26,10 +26,10 @@ def subimage(image_path1, image_path2):
 			return "sub image not found"
 		else:
 			if res1 == -1:
-				return res2
+				return res2[1]
 			else:
 				if res2 == -1:
-					return res1
+					return res1[1]
 				else:
 					mn1, mnloc1 = res1
 					mn2, mnloc2 = res2
