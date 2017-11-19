@@ -7,8 +7,9 @@ def compare(small_image, large_image):
 	method = cv.CV_TM_SQDIFF_NORMED	
 	result = cv2.matchTemplate(small_image, large_image, method)
 	mn,_,mnLoc,_ = cv2.minMaxLoc(result)
-	if mn < 0.25 :
-		return mnLoc
+	threshold = 0.25 # This should be decided using data mining
+	if mn < threshold :
+		return mn, mnLoc
 	else:
 		return -1
 		
@@ -24,10 +25,18 @@ def subimage(image_path1, image_path2):
 		if res1 == -1 and res2 == -1:
 			return "sub image not found"
 		else:
-			if res1 != -1:
-				return res1
-			else:
+			if res1 == -1:
 				return res2
+			else:
+				if res2 == -1:
+					return res1
+				else:
+					mn1, mnloc1 = res1
+					mn2, mnloc2 = res2
+					if mn1 < mn2 :
+						return mnloc1
+					else:
+						return mnloc2
 	except Exception,e:
 		return str(e)
 			
