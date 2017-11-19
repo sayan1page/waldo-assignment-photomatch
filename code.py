@@ -1,6 +1,7 @@
 import cv2
 from cv2 import cv
 from concurrent.futures import ThreadPoolExecutor
+import sys
 
 
 def compare(small_image, large_image):
@@ -38,13 +39,19 @@ def subimage(image_path1, image_path2):
 					else:
 						return mnloc2
 	except Exception,e:
-		return str(e)
+	    return "There is an exception and dtail is :\n" + str(e)
 			
-print subimage('abcd.jpg','template_ccorr_3.jpg')
+#print subimage('abcd.jpg','template_ccorr_3.jpg')
 
-print subimage('messi_face.jpg','template_ccorr_3.jpg') 
+#print subimage('messi_face.jpg','template_ccorr_3.jpg') 
 			
-print subimage('img216.jpg','template_ccorr_3.jpg')
+#print subimage('img216.jpg','template_ccorr_3.jpg')
+
+if len(sys.argv) < 3:
+	print "usage is:"
+	print "python " + sys.argv[0] + " <image file 1>   <image file 2>"
+print subimage(sys.argv[1], sys.argv[2])
+	
 
 
 
